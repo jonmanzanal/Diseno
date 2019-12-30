@@ -4,7 +4,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.Usuario;
 import dto.VueloDTO;
+import services.LoginService;
+
 
 
 
@@ -12,7 +15,8 @@ import dto.VueloDTO;
 public class AuctionServer  extends UnicastRemoteObject implements IAuction {
 	private static final long serialVersionUID = 1L;
 	private static AuctionServer instance;
-	
+	public Usuario state;
+
 
 	private AuctionServer() throws RemoteException {
 		super();		
@@ -32,8 +36,10 @@ public class AuctionServer  extends UnicastRemoteObject implements IAuction {
 
 	@Override
 	public boolean login(String aEmail, String aPassword) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println(" * RemoteFaçade login: " + email + " / " + password);
+		this.state = LoginService.getInstance().login(email, password);
+		
+		return state != null;
 	}
 
 	@Override

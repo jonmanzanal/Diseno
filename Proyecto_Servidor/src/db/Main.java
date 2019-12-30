@@ -23,13 +23,21 @@ import data.Usuario;
 import data.Visa;
 import data.Vuelo;
 
+
+
+
 public class Main {
-
-	private static PersistenceManager persistentManager;
-
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		System.out.println("q1");
+	private static Main instance = null;
+	private static PersistenceManager persistentManager=null;
+	private PersistenceManagerFactory pmf = null;
+	 
+	private Main() {
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");		
+	}
+	
+	private void initializeData() {
+		System.out.println(" * Initializing data base");
+		//Create Sample data
 		Set<Reserva> lires = new HashSet<>();
 		Set<String> pas = new HashSet<>();
 		Set<Vuelo> vu = new HashSet<>();
@@ -87,18 +95,33 @@ public class Main {
 		ar.setId_aer("HH");
 		ar.setNombre("Iberia");
 		ar.setVuelo(vu);
-		PersistenceManagerFactory persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-
-		persistentManager = null;
+		
+		try {
+			//Store users in DB
+			Main.getInstance().store(u);
+			Main.getInstance().store(r);
+			
+		} catch (Exception ex) {
+			System.out.println(" $ Error initializing data: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	public void store(Usuario user) {
+		Main.getInstance().storeObjectInDB(user);	
+	}
+	public void store(Reserva r) {
+		Main.getInstance().storeObjectInDB(r);	
+	}
+	public void storeObjectInDB(Object object) {
 		Transaction transaction = null;
 		
 		try {
-			System.out.println("Store user");
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			System.out.println("Store object");
+			persistentManager = pmf.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 			transaction.begin();
 
-			persistentManager.makePersistent(u);
+			persistentManager.makePersistent(object);
 
 			transaction.commit();
 		} catch (Exception e) {
@@ -110,6 +133,25 @@ public class Main {
 			}
 			persistentManager.close();
 		}
+	}
+	public static Main getInstance() {
+		if (instance == null) {
+			instance = new Main();
+			instance.initializeData();
+		}		
+		
+		return instance;
+	}
+	
+	public Usuario getUsuario()
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		
+		
+	
+
+		
+		
 
 		// Select data using a Query
 		persistentManager = persistentManagerFactory.getPersistenceManager();

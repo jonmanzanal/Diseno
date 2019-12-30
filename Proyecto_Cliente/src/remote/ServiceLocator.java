@@ -2,7 +2,7 @@ package remote;
 
 import java.rmi.Naming;
 
-import es.deusto.ingenieria.sd.auctions.server.remote.IRemoteFacade;
+import remote.IAuction;
 
 public class ServiceLocator {
 	private IAuction service;
