@@ -3,6 +3,7 @@ package db;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -26,12 +27,13 @@ import data.Vuelo;
 
 
 
-public class Main {
-	private static Main instance = null;
+
+public class GestorBD implements IGestionDAO{
+	private static GestorBD instance = null;
 	private static PersistenceManager persistentManager=null;
 	private PersistenceManagerFactory pmf = null;
 	 
-	private Main() {
+	private GestorBD() {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");		
 	}
 	
@@ -98,8 +100,8 @@ public class Main {
 		
 		try {
 			//Store users in DB
-			Main.getInstance().store(u);
-			Main.getInstance().store(r);
+			GestorBD.getInstance().store(u);
+			GestorBD.getInstance().store(r);
 			
 		} catch (Exception ex) {
 			System.out.println(" $ Error initializing data: " + ex.getMessage());
@@ -107,10 +109,10 @@ public class Main {
 		}
 	}
 	public void store(Usuario user) {
-		Main.getInstance().storeObjectInDB(user);	
+		GestorBD.getInstance().storeObjectInDB(user);	
 	}
 	public void store(Reserva r) {
-		Main.getInstance().storeObjectInDB(r);	
+		GestorBD.getInstance().storeObjectInDB(r);	
 	}
 	public void storeObjectInDB(Object object) {
 		Transaction transaction = null;
@@ -134,88 +136,86 @@ public class Main {
 			persistentManager.close();
 		}
 	}
-	public static Main getInstance() {
+	public static GestorBD getInstance() {
 		if (instance == null) {
-			instance = new Main();
+			instance = new GestorBD();
 			instance.initializeData();
 		}		
 		
 		return instance;
 	}
 	
-	public Usuario getUsuario()
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		
-		
-	
-
-		
-		
-
-		// Select data using a Query
-		persistentManager = persistentManagerFactory.getPersistenceManager();
+	public Usuario getUsuario(String email) {
+		persistentManager = pmf.getPersistenceManager();
+		Transaction transaction = null;
 		transaction = persistentManager.currentTransaction();
+		Usuario usuario=null;
 		try {
 			transaction.begin();
 			// Usuario
-			Query<?> usuQuery = persistentManager.newQuery("SELECT FROM " + Usuario.class.getName());
-
-			for (Usuario usuario : (List<Usuario>) usuQuery.executeList()) {
-				System.out.println("- Selected product from db: " + usuario.getId_usu());
-				System.out.println("- Deleted product from db: " + usuario.getId_usu());
-				persistentManager.deletePersistent(usuario);				
-			}
-			// Vuelo
-			Query<?> vuQuery = persistentManager.newQuery("SELECT FROM " + Vuelo.class.getName());
-
-			for (Vuelo vuelo : (List<Vuelo>) vuQuery.executeList()) {
-				System.out.println("- Selected product from db: " + vuelo.getId_vu());
-				System.out.println("- Deleted product from db: " + vuelo.getId_vu());
-				persistentManager.deletePersistent(vuelo);				
-			}
-			// Paypal
-			Query<?> paQuery = persistentManager.newQuery("SELECT FROM " + Paypal.class.getName());
-
-			for (Paypal paypal : (List<Paypal>) paQuery.executeList()) {
-				System.out.println("- Selected product from db: " + paypal.getUsuario());
-				System.out.println("- Deleted product from db: " + paypal.getUsuario());
-				persistentManager.deletePersistent(paypal);				
-			}
-			// Visa
-			Query<?> viQuery = persistentManager.newQuery("SELECT FROM " + Visa.class.getName());
-
-			for (Visa visa : (List<Visa>) viQuery.executeList()) {
-				System.out.println("- Selected product from db: " + visa.getNum_tarjeta());
-				System.out.println("- Deleted product from db: " + visa.getNum_tarjeta());
-				persistentManager.deletePersistent(visa);				
-			}
-			// Reserva
-			Extent<Reserva> reserExtent = persistentManager.getExtent(Reserva.class);
-
-			for (Reserva reserva : reserExtent) {
-				System.out.println("  -> " + reserva);
-				System.out.println("- Deleted inventory from db: ");
-				persistentManager.deletePersistent(reserva);				
-			}
-
-			transaction.commit();
-		} catch (Exception ex) {
-			System.err.println("* Exception executing a query: " + ex.getMessage());
-		} finally {
-			if (transaction.isActive()) {
-				transaction.rollback();
-			}
-
-			persistentManager.close();
+			Query<?> usuQuery = persistentManager.newQuery("SELECT FROM " + Usuario.class.getName() +"WHERE email== '"+ email+"'");
+			usuQuery.setUnique(true);
+			usuario=(Usuario) usuQuery.execute();
+	transaction.commit();
+	} catch (Exception ex) {
+		System.err.println("* Exception executing a query: " + ex.getMessage());
+	} finally {
+		if (transaction.isActive()) {
+			transaction.rollback();
 		}
-		// Update
-		try {
-			Usuario usuario = persistentManager.getObjectById(Usuario.class, u.getEmail());
-			usuario.setAeropuertopordefecto(null);
-		} finally {
-			persistentManager.close();
-		}
-
+		persistentManager.close();
 	}
+		return usuario;
+	}
+	public List<Reserva> getReserva() {
+		// Reserva
+		persistentManager = pmf.getPersistenceManager();
+		Transaction transaction = null;
+		transaction = persistentManager.currentTransaction();
+		List<Reserva> reservas = new ArrayList<>();
+		try {
+			transaction.begin();
+		Extent<Reserva> reserExtent = persistentManager.getExtent(Reserva.class);
+
+					for (Reserva reserva : reserExtent) {
+						System.out.println("  -> " + reserva);
+									
+					}
+
+					transaction.commit();
+				} catch (Exception ex) {
+					System.err.println("* Exception executing a query: " + ex.getMessage());
+				} finally {
+					if (transaction.isActive()) {
+						transaction.rollback();
+					}
+
+					persistentManager.close();
+				}
+		return reservas;
+	}
+	public Reserva getUsuario(int res) {
+		persistentManager = pmf.getPersistenceManager();
+		Transaction transaction = null;
+		transaction = persistentManager.currentTransaction();
+		Reserva reserva=null;
+		try {
+			transaction.begin();
+			// Usuario
+			Query<?> usuQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() +"WHERE email== "+ res);
+			usuQuery.setUnique(true);
+			reserva=(Reserva) usuQuery.execute();
+	transaction.commit();
+	} catch (Exception ex) {
+		System.err.println("* Exception executing a query: " + ex.getMessage());
+	} finally {
+		if (transaction.isActive()) {
+			transaction.rollback();
+		}
+		persistentManager.close();
+	}
+		return reserva;
+	}
+	
+	
 }
