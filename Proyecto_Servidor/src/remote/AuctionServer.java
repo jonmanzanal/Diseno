@@ -36,8 +36,8 @@ public class AuctionServer  extends UnicastRemoteObject implements IAuction {
 
 	@Override
 	public boolean login(String aEmail, String aPassword) throws RemoteException {
-		System.out.println(" * RemoteFaçade login: " + email + " / " + password);
-		this.state = LoginService.getInstance().login(email, password);
+		System.out.println(" * RemoteFaçade login: " + aEmail + " / " + aPassword);
+		this.state = LoginService.getInstance().login(aEmail, aPassword);
 		
 		return state != null;
 	}

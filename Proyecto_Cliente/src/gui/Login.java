@@ -16,11 +16,12 @@ public class Login  extends JFrame  {
 	private JTextField textField_1;
 	public Login(ReservaController controller) {
 		this.controller = controller;
+		Login();
 	}
 	private String u;
 	private String p;
 	
-	public Login() {
+	private void Login() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		this.setSize(600,400);

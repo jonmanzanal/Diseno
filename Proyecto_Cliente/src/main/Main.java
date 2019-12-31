@@ -12,7 +12,7 @@ public class Main {
 		
 		ReservaController reservaController = new ReservaController(serviceLocator);
 		Ventana loginDialog = new Ventana(reservaController);			
-		loginDialog.login();
+		
 		
 				
 				

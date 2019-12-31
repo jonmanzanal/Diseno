@@ -24,7 +24,7 @@ public class Usuario {
 		this.apellidos = "";
 		this.aeropuertopordefecto = null;
 		this.tiporedsocial = 0;
-		this.reserva = new HashSet<Reserva>();;
+		this.reserva = new HashSet<Reserva>();
 	}
 
 	public long getId_usu() {

@@ -21,7 +21,7 @@ public class Ventana extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login login=new Login();
+				Login login=new Login(controller);
 				login.setVisible(true);
 				
 				dispose();

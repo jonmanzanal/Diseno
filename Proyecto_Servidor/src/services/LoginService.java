@@ -2,10 +2,12 @@ package services;
 
 import data.Usuario;
 import db.GestorBD;
+import google.ConexionGoogle;
+import google.RMISErviceLocatorGoogle;
 
 public class LoginService {
 private static LoginService instance;
-	
+ConexionGoogle v=new ConexionGoogle(new RMISErviceLocatorGoogle());
 	private LoginService() { }
 	
 	public static LoginService getInstance() {
@@ -20,7 +22,8 @@ private static LoginService instance;
 		Usuario user = GestorBD.getInstance().getUsuario(email);
 		
 		if (user != null) {
-			return user;
+		v.login(email,password);
+		return user;
 		} else {
 			return null;
 		}

@@ -21,7 +21,7 @@ public class ReservaController {
 			return false;
 		}
 	}
-	
+	/*
 	public boolean pago(float bid) {
 		try {
 			return this.serviceLocator.getService().makeBid( bid);
@@ -30,8 +30,8 @@ public class ReservaController {
 			return false;
 		}
 	}
-	
-	public List<VueloDTO> getCategories() {
+	*/
+	/*public List<VueloDTO> getCategories() {
 		try {
 			return this.serviceLocator.getService().getCategories();
 		} catch (RemoteException e) {
@@ -40,5 +40,5 @@ public class ReservaController {
 		}
 	}
 	
-	
+	*/
 }

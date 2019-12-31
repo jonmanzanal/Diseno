@@ -3,6 +3,7 @@
 	<name>Proyecto_Cliente</name>
 	<comment></comment>
 	<projects>
+		<project>Proyecto_Servidor</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
