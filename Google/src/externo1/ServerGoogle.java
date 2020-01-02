@@ -1,15 +1,10 @@
-package server;
+package externo1;
 
 import java.rmi.Naming;
 
-import remote.AuctionServer;
-import remote.IAuction;
 
 
-
-
-public class Main {
-
+public class ServerGoogle {
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
@@ -18,14 +13,13 @@ public class Main {
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
 		
 		try {
-			IAuction remoteFacade = AuctionServer.getInstance();			
+			IGoogle remoteFacade = Google.getInstance();			
 			Naming.rebind(name, remoteFacade);
-			System.out.println(" * EasyBooking server '" + name + "' started!!");
+			System.out.println(" * Google server '" + name + "' started!!");
 		} catch (Exception ex) {
-			System.err.println(" # EasyBooking Server Exception: " + ex.getMessage());
+			System.err.println(" # Google Server Exception: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 
 	}
-
 }

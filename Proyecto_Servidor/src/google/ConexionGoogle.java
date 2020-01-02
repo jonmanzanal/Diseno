@@ -3,12 +3,13 @@ package google;
 import java.rmi.RemoteException;
 
 import data.Usuario;
+import externo1.DatosG;
 
 
 public class ConexionGoogle implements IGatewayLogin{
-	public RMISErviceLocatorGoogle serviceLocator;
-
-	public ConexionGoogle(RMISErviceLocatorGoogle serviceLocator) {
+	public ServiceLocatorGoogle serviceLocator;
+	
+	public ConexionGoogle(ServiceLocatorGoogle serviceLocator) {
 		this.serviceLocator = serviceLocator;
 	}
 	@Override
@@ -23,8 +24,13 @@ public class ConexionGoogle implements IGatewayLogin{
 
 	@Override
 	public Usuario registrarUsuario(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return (Usuario) this.serviceLocator.getService().registro(email);
+		} catch (RemoteException e) {
+			System.err.println("# Error during login: " + e);
+			return null;
+		}
+		
 	}
 
 }

@@ -1,12 +1,12 @@
-package server;
+package externo1;
 
-public class Usuario {
+public class DatosG {
 private String email;
 private String contrasena;
 
 
 
-public Usuario(String email, String contrasena) {
+public DatosG(String email, String contrasena) {
 	super();
 	this.email = email;
 	this.contrasena = contrasena;

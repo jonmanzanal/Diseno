@@ -7,5 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Proyecto_Servidor"/>
+	<classpathentry kind="lib" path="lib/eAuctions.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

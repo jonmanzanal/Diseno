@@ -11,7 +11,8 @@ public class Main {
 		serviceLocator.setService(args[0], args[1], args[2]);
 		
 		ReservaController reservaController = new ReservaController(serviceLocator);
-		Ventana loginDialog = new Ventana(reservaController);			
+		Ventana loginDialog = new Ventana(reservaController);
+		loginDialog.setVisible(true);
 		
 		
 				

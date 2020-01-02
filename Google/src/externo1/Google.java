@@ -1,4 +1,4 @@
-package server;
+package externo1;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -6,18 +6,32 @@ import java.util.List;
 
 
 
+
+
 public class Google extends UnicastRemoteObject implements IGoogle {
-private List<Usuario> usuarios=new ArrayList<Usuario>();
+private List<DatosG> usuarios=new ArrayList<DatosG>();
+private static Google instance;
 	/**
 	 * 
 	 */
+public static Google getInstance() {
+	if (instance == null) {
+		try {
+			instance = new Google();
+		} catch (Exception ex) {
+			System.err.println("# Error creating RemoteFacade: " + ex);
+		}
+	}
+	
+	return instance;
+}
 	private static final long serialVersionUID = 1L;
 	private Google() throws RemoteException {
 		super();		
 	}
 	@Override
 	public boolean login(String aEmail, String aPassword) throws RemoteException {
-		for (Usuario object : usuarios) {
+		for (DatosG object : usuarios) {
 			if(object.getContrasena() == aPassword && object.getEmail()== aEmail) {
 				return true;
 			}
@@ -26,8 +40,8 @@ private List<Usuario> usuarios=new ArrayList<Usuario>();
 	}
 
 	@Override
-	public Usuario registro(String email) throws RemoteException {
-		for (Usuario usuario : usuarios) {
+	public DatosG registro(String email) throws RemoteException {
+		for (DatosG usuario : usuarios) {
 			if(usuario.getEmail() == email) {
 				return usuario;
 			}

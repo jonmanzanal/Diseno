@@ -10,9 +10,10 @@ public class Ventana extends JFrame {
 	public ReservaController controller;
 	public Ventana(ReservaController controller) {
 		this.controller = controller;
+		Ventana();
 	}
 	
-	public Ventana() {
+	private void Ventana() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setVisible(true);
@@ -42,8 +43,6 @@ public class Ventana extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		Ventana v=new Ventana();
-		v.setVisible(true);
-
+	
 	}
 }

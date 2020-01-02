@@ -2,9 +2,9 @@ package google;
 
 import java.rmi.Naming;
 
-import server.IGoogle;
+import externo1.IGoogle;
 
-public class RMISErviceLocatorGoogle {
+public class ServiceLocatorGoogle {
 	private IGoogle service;
 
 	public void setService(String ip, String port, String serverName) {

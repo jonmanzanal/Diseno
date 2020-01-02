@@ -80,7 +80,7 @@ public class GestorBD implements IGestionDAO{
 		Usuario u = new Usuario();
 		u.setAeropuertopordefecto(a);
 		u.setApellidos("Manzanal");
-		u.setEmail("jes");
+		u.setEmail("jesii");
 		u.setTiporedsocial(1);
 		u.setReserva(lires);
 
