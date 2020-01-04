@@ -3,8 +3,7 @@ package google;
 import java.rmi.RemoteException;
 
 import data.Usuario;
-import externo1.DatosG;
-
+import gremote.IGoogle;
 
 public class ConexionGoogle implements IGatewayLogin{
 	public ServiceLocatorGoogle serviceLocator;

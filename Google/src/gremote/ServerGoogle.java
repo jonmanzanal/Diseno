@@ -1,4 +1,4 @@
-package externo1;
+package gremote;
 
 import java.rmi.Naming;
 

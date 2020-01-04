@@ -2,7 +2,7 @@ package google;
 
 import java.rmi.Naming;
 
-import externo1.IGoogle;
+import gremote.IGoogle;
 
 public class ServiceLocatorGoogle {
 	private IGoogle service;

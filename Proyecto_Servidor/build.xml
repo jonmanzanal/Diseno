@@ -69,13 +69,9 @@
         </java>
     </target>
 	
-	<target name="7.client1" depends="6.server"  description="Runs Client program">
-			<java classname="server.LoginService" classpathref="classpath" fork="true">
-				<jvmarg value="-Djava.security.policy=${policy.file}"/>			
-	        </java>
-	    </target>
+	
 		
-	<target name="8.delete-db-schema" depends="2.enhance-classes" description="Drops DB sechema from the DB Server">
+	<target name="7.delete-db-schema" depends="2.enhance-classes" description="Drops DB sechema from the DB Server">
 		<taskdef name="schematool" classpathref="classpath" classname="org.datanucleus.store.schema.SchemaToolTask"/>
     	<schematool mode="delete" classpathref="classpath" props="datanucleus.properties" failonerror="true">            
     	   	<sysproperty key="log4j.configuration" value="file:${resources.dir}/log4j.properties"/>

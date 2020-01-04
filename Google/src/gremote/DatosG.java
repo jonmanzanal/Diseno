@@ -1,4 +1,4 @@
-package externo1;
+package gremote;
 
 public class DatosG {
 private String email;
