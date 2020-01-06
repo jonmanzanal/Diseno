@@ -11,17 +11,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login  extends JFrame  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ReservaController controller;
 	private JTextField textField;
 	private JTextField textField_1;
 	public Login(ReservaController controller) {
 		this.controller = controller;
-		Login();
+		iniciarLogin();
 	}
 	private String u;
 	private String p;
 	
-	private void Login() {
+	private void iniciarLogin() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		this.setSize(600,400);
@@ -36,6 +40,7 @@ public class Login  extends JFrame  {
 			public void actionPerformed(ActionEvent e) {
 				u=textField.getText();
 				p=textField_1.getText();
+				login(u,p);
 				
 			}
 		});
@@ -65,7 +70,7 @@ public class Login  extends JFrame  {
 		
 	}
 	
-	public void login() {
+	public void login(String u, String p) {
 		System.out.println(" - Login into the server: '" + u + "' - '" + p + "'");
 		
 		boolean loginResult = controller.login(u, p);

@@ -10,6 +10,7 @@
 	<property name="rmiregistry.IP" value="127.0.0.1"/> 
 	<property name="rmiregistry.port" value="1099"/> 
 	<property name="server.name" value="eEasyBooking"/>
+	<property name="server.name2" value="Google"/>
 
 	<path id="classpath">
         <fileset dir="${lib.dir}">
@@ -80,4 +81,12 @@
             </fileset>
         </schematool>
 	</target>
+	<target name="9.client"   description="Runs Client program">
+			<java classname="google.GoogleMain" classpathref="classpath" fork="true">
+				<jvmarg value="-Djava.security.policy=${policy.file}"/>			
+	        	<arg value="${rmiregistry.IP}"/> 
+		 		<arg value="${rmiregistry.port}"/> 
+				<arg value="${server.name2}"/> 
+	        </java>
+	    </target>
 </project>

@@ -13,6 +13,7 @@
 	<classpathentry kind="lib" path="lib/javax.jdo-3.2.0-m12.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.17.jar"/>
-	<classpathentry kind="lib" path="lib/Google.jar"/>
+	<classpathentry kind="lib" path="lib/eGoogle.jar"/>
+	<classpathentry kind="lib" path="lib/ePago.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

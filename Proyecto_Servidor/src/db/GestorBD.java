@@ -153,7 +153,7 @@ public class GestorBD implements IGestionDAO{
 		try {
 			transaction.begin();
 			// Usuario
-			Query<?> usuQuery = persistentManager.newQuery("SELECT FROM " + Usuario.class.getName() +"WHERE email== '"+ email+"'");
+			Query<?> usuQuery = persistentManager.newQuery("SELECT FROM " + Usuario.class.getName() +" WHERE email == '"+ email+"'");
 			usuQuery.setUnique(true);
 			usuario=(Usuario) usuQuery.execute();
 	transaction.commit();

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+
 import data.Usuario;
 import dto.VueloDTO;
 import services.LoginService;
@@ -16,6 +17,7 @@ public class AuctionServer  extends UnicastRemoteObject implements IAuction {
 	private static final long serialVersionUID = 1L;
 	private static AuctionServer instance;
 	public Usuario state;
+	public Usuario state1;
 
 
 	private AuctionServer() throws RemoteException {
@@ -49,8 +51,16 @@ public class AuctionServer  extends UnicastRemoteObject implements IAuction {
 	}
 
 	@Override
-	public boolean makeBid(long aArticle, float aBid) throws RemoteException {
+	public boolean pago(String nombre, float aBid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean registro(String aEmail) throws RemoteException {
+		System.out.println("remote registro");
+		this.state1 = LoginService.getInstance().registro(aEmail);
+		
+		return state1 != null;
 	}
 }

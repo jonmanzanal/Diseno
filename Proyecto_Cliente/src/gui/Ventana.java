@@ -34,6 +34,17 @@ public class Ventana extends JFrame {
 		JButton btnNewButton_1 = new JButton("Registro");
 		btnNewButton_1.setBounds(296, 214, 89, 23);
 		getContentPane().add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Registro login=new Registro(controller);
+				login.setVisible(true);
+				
+				dispose();
+				
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("Bienvenido a EasyBooking");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));

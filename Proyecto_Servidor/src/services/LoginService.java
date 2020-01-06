@@ -2,6 +2,8 @@ package services;
 
 import data.Usuario;
 import db.GestorBD;
+import google.ConexionGoogle;
+import google.GoogleMain;
 import google.ServiceLocatorGoogle;
 
 
@@ -9,19 +11,13 @@ import google.ServiceLocatorGoogle;
 
 public class LoginService {
 private static LoginService instance;
-public static void  main(String[] args) {
-	ServiceLocatorGoogle servicegoogle = new ServiceLocatorGoogle();
-	servicegoogle.setService(args[0], args[1], args[2]);
-	//ConexionGoogle v=new ConexionGoogle(servicegoogle);
-	//return v;
-}
-
-
+	
 
 	private LoginService() { }
 	
 	public static LoginService getInstance() {
 		if (instance == null) {
+			
 			instance = new LoginService();
 		}
 		
@@ -31,20 +27,31 @@ public static void  main(String[] args) {
 	public Usuario login(String email, String password) {
 		
 		Usuario user = GestorBD.getInstance().getUsuario(email);
-		
+		ConexionGoogle go= GoogleMain.Loko();
+		boolean google=go.login(email,password);
 		if (user != null) {
+		if(google) {
+			return user;
+		}
+		return null;
 		
-		return user;
 		} else {
 			return null;
 		}
 	}
 	public Usuario registro(String email) {
-		return null;
-		//String[]args= {"127.0.0.1","1099","Google"};
-		//ConexionGoogle v =main(args);
-		//Usuario user=v.registrarUsuario(email);
-		//GestorBD.getInstance().store(user);
-		//return user;
+		System.out.println("registro");
+		ConexionGoogle go= GoogleMain.Loko();
+		Usuario user=go.registrarUsuario(email);
+		GestorBD.getInstance().store(user);
+		
+		
+		if (user != null) {
+			
+			return user;
+			
+			} else {
+				return null;
+			}
 	}
 }

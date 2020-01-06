@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Google extends UnicastRemoteObject implements IGoogle {
-private List<DatosG> usuarios=new ArrayList<DatosG>();
+private static List<DatosG> usuarios=new ArrayList<DatosG>();
 private static Google instance;
 	/**
 	 * 
@@ -17,6 +17,10 @@ private static Google instance;
 public static Google getInstance() {
 	if (instance == null) {
 		try {
+			usuarios.add(new DatosG("jese","jost"));
+			usuarios.add(new DatosG("jesi","josy"));
+			usuarios.add(new DatosG("jesu","josu"));
+			usuarios.add(new DatosG("jesa","josi"));
 			instance = new Google();
 		} catch (Exception ex) {
 			System.err.println("# Error creating RemoteFacade: " + ex);
@@ -41,6 +45,7 @@ public static Google getInstance() {
 
 	@Override
 	public DatosG registro(String email) throws RemoteException {
+		System.out.println("google");
 		for (DatosG usuario : usuarios) {
 			if(usuario.getEmail() == email) {
 				return usuario;
