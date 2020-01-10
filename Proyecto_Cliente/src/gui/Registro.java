@@ -50,7 +50,7 @@ public class Registro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				boolean b=registro(textField.getText());
 				if(b) {
-					JOptionPane.showConfirmDialog(null, "registro efectuado");
+					JOptionPane.showConfirmDialog(null, "registro efectuado correctamente");
 					dispose();
 					Ventana ventana=new Ventana(controller);
 					ventana.setVisible(true);
